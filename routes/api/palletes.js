@@ -15,8 +15,9 @@ router.get("/", (req, res) => {
 // @desc Create a pallete
 // @access Public
 router.post("/", (req, res) => {
+  console.log("req.body:", req.body);
   const newPallete = new Pallete({ name: req.body.name });
-  newPallete.save().then(pallete => res.json(item));
+  newPallete.save().then(pallete => res.json(pallete));
 });
 
 // @route DELETE api/palletes/:id

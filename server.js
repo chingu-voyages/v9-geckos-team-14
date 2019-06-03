@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
-const items = require("./routes/api/items");
+const palletes = require("./routes/api/palletes");
 
 const app = express();
 
@@ -15,7 +15,7 @@ mongoose
   .then(() => console.log("DB connected"))
   .catch(error => console.error(error));
 
-app.use("/api/items", items);
+app.use("/api/palletes", palletes);
 
 const port = process.env.PORT || 5000;
 
