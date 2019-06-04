@@ -1,9 +1,14 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import MainPallete from "./components/Pallete/MainPallete";
+import ListColors from "./resources/ListColors";
 
 function App() {
-  return <div className="App">color</div>;
+  return (
+    <div className="App">
+      <MainPallete {...ListColors[0]} />
+    </div>
+  );
 }
 
 export default App;
