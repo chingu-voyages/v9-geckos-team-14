@@ -5,6 +5,7 @@
     display: inline-block;
     position: relative;
     cursor: pointer;
+    margin-bottom: -3.5px;
 }
 
 .copy-btn {
@@ -31,4 +32,13 @@
     opacity: 1;
     transition: 0.5s;
     cursor: pointer;
+}
+.color-content {
+    position: absolute;
+    padding: 10px;
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
