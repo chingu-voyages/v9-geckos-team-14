@@ -1,0 +1,38 @@
+{
+  "name": "v9-geckos-team-14",
+  "version": "1.0.0",
+  "description": "Voyage-9",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11",
+    "eslint": "^5.4.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "prettier": "^1.14.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chingu-voyages/v9-geckos-team-14.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chingu-voyages/v9-geckos-team-14/issues"
+  },
+  "homepage": "https://github.com/chingu-voyages/v9-geckos-team-14#readme"
+}
