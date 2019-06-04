@@ -7,7 +7,13 @@
 After cloning this repo you need to do little setup:
 
 - First, `npm install`
-- After that you need to prepare frontend side: `npm run client-install`
+- After that you need to prepare frontend side:
+
+```
+cd client
+npm install
+cd ..
+```
 
 At this point, if you want only **frontend** server to work, you can do `npm run client`. It will start React's development server.
 
