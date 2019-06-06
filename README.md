@@ -1,4 +1,4 @@
-# Color palletes
+# Color palettes
 
 [Chingu](https://chingu.io/) Voyage-9 project
 
