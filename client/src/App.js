@@ -1,9 +1,10 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
-import MainPalette from "./components/Pallete/MainPalette";
+import MainPalette from "./components/Palette/MainPalette";
 import ListColors from "./resources/ListColors";
 import { generatePalette } from "./resources/Helper";
+import DisplayListPalette from "./components/DisplayListPalette/DisplayListPalette";
 
 class App extends React.Component {
   findPalette(id) {
@@ -17,7 +18,11 @@ class App extends React.Component {
     return (
       <Switch>
         {" "}
-        <Route exact path="/" render={() => <h1>hey</h1>} />
+        <Route
+          exact
+          path="/"
+          render={() => <DisplayListPalette listPalettes={ListColors} />}
+        />
         <Route
           exact
           path="/palette/:id"
