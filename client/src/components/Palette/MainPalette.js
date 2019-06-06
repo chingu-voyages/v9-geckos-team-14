@@ -8,7 +8,6 @@ export default class MainPalette extends Component {
   };
   render() {
     const { colorShades } = this.props.palette;
-    // console.log(colors);
     const displayColors = colorShades[this.state.level].map(color => (
       <ColorShades background={color.hex} name={color.name} />
     ));
