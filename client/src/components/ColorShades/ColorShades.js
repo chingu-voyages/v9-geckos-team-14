@@ -5,7 +5,6 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 export default class ColorShades extends Component {
   state = { isCopied: false };
   onCopyHandler = () => {
-    console.log("Test");
     this.setState(
       {
         isCopied: true
@@ -14,7 +13,6 @@ export default class ColorShades extends Component {
         setTimeout(() => this.setState({ isCopied: false }), 1000);
       }
     );
-    console.log(this.state.isCopied);
   };
 
   render() {
