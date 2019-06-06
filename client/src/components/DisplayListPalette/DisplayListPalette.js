@@ -6,9 +6,9 @@ export default class DisplayListPalette extends Component {
     return (
       <div>
         {listPalettes.map(palette => (
-          <h1>
+          <p>
             <Link to={`/palette/${palette.id}`}>{palette.paletteName} </Link>
-          </h1>
+          </p>
         ))}
       </div>
     );
