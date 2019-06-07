@@ -158,7 +158,7 @@ router.get("/verify", (req, res, next) => {
       } else {
         return res.send({
           success: true,
-          message: "Ok"
+          message: "Verified"
         });
       }
     }
@@ -193,7 +193,7 @@ router.get("/logout", (req, res, next) => {
 
       return res.send({
         success: true,
-        message: "Ok"
+        message: "Logged out"
       });
     }
   );
