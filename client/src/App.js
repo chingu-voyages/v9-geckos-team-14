@@ -6,6 +6,8 @@ import ListColors from "./resources/ListColors";
 import { generatePalette } from "./resources/Helper";
 import DisplayListPalette from "./components/DisplayListPalette/DisplayListPalette";
 
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+
 class App extends React.Component {
   findPalette(id) {
     return ListColors.find(function(palette) {
@@ -13,34 +15,40 @@ class App extends React.Component {
     });
   }
   render() {
-    // console.log("test" + JSON.stringify(generatePalette(ListColors[0])));
-
     return (
-      <Switch>
-        {" "}
-        <Route
-          exact
-          path="/"
-          render={routeProps => (
-            <DisplayListPalette listPalettes={ListColors} {...routeProps} />
-          )}
-        />
-        <Route
-          exact
-          path="/palette/:id"
-          render={routeProps => (
-            <MainPalette
-              palette={generatePalette(
-                this.findPalette(routeProps.match.params.id)
-              )}
-            />
-          )}
-        />
-      </Switch>
-
-      // <div className="App">
-      //   <MainPalette {...ListColors[0]} />
-      // </div>
+      <Route
+        render={({ location }) => (
+          <TransitionGroup>
+            <CSSTransition classNames="fade" timeout={500} key={location.key}>
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={routeProps => (
+                    <div className="page">
+                      <DisplayListPalette
+                        listPalettes={ListColors}
+                        {...routeProps}
+                      />
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path="/palette/:id"
+                  render={routeProps => (
+                    <MainPalette
+                      palette={generatePalette(
+                        this.findPalette(routeProps.match.params.id)
+                      )}
+                    />
+                  )}
+                />
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        )}
+      />
     );
   }
 }

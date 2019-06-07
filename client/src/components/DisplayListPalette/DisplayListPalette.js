@@ -3,6 +3,14 @@ import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import HomePalettes from "../HomePalettes/HomePalettes";
 const styles = {
+  "@global": {
+    "fade-exit": {
+      opacity: 1
+    },
+    "fade-exit-active": {
+      opacity: 0
+    }
+  },
   root: {
     background: "linear-gradient(to right, #007991, #78ffd6)",
     minHeight: "100vh",
@@ -29,7 +37,7 @@ const styles = {
     width: "100%",
     display: "grid",
     gridTemplateColumns: "repeat(4, 25%)",
-    gridGap: "1.5%"
+    gridGap: "2%"
   }
 };
 class DisplayListPalette extends Component {

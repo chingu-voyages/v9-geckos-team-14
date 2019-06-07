@@ -3,10 +3,10 @@ import { withStyles } from "@material-ui/styles";
 
 const styles = {
   root: {
+    height: "100%",
     backgroundColor: "#f7f2c5",
-    border: "2px solid #000",
+    border: "1px solid #000",
     borderRadius: "5%",
-    fontSize: "300",
     // padding: "0.5rem",
     overflow: "hidden",
     position: "relative",
@@ -29,7 +29,9 @@ const styles = {
     paddingTop: "0.5rem",
     fontSize: "1rem",
     position: "relative",
-    textTransform: "capitalize"
+    textTransform: "capitalize",
+    fontWeight: "500",
+    wordSpacing: "1"
   },
   miniColorBox: {
     height: "25%",
@@ -37,7 +39,7 @@ const styles = {
     display: "inline-block",
     margin: "0 auto",
     position: "relative",
-    marginBottom: "-3.5px",
+    marginBottom: "-4px",
     border: "0.1px groove #000"
   }
 };
@@ -54,7 +56,7 @@ const HomePalettes = props => {
   return (
     <div className={classes.root} onClick={clickHandler}>
       <div className={classes.colors}>{miniColorBoxes}</div>
-      <h5 className={classes.title}>{paletteName}</h5>
+      <p className={classes.title}>{paletteName}</p>
     </div>
   );
 };
