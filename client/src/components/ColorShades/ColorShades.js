@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./ColorShades.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { ListMsg } from "../../resources/ListMsg";
 
 export default class ColorShades extends Component {
   state = { isCopied: false };
@@ -19,7 +20,7 @@ export default class ColorShades extends Component {
     const { background, name } = this.props;
     const { isCopied } = this.state;
     const msg = ["Hurray thats awsome", "Bingo", "Mind Blowing", "Frozen"];
-    const randMsg = msg[(Math.random() * msg.length) | 0];
+    const randMsg = ListMsg[(Math.random() * msg.length) | 0];
     return (
       <CopyToClipboard text={background} onCopy={this.onCopyHandler}>
         <div style={{ background }} className="ColorShades">

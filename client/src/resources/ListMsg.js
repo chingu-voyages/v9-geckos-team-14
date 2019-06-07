@@ -1,0 +1,32 @@
+const ListMsg = [
+  "Outstanding",
+  "Astounding",
+  "Staggering",
+  "Kryptonian",
+  "Breathtaking",
+  "Stunning",
+  "Prodigious",
+  "Stupendous",
+  "Righteous",
+  "Wicked",
+  "Superb",
+  "Sublime",
+  "Indomitable",
+  "Transcendent",
+  "Marvelous",
+  "Resplendent",
+  "Phenomenal",
+  "Remarkable",
+  "Funkadelic",
+  "Magnificent",
+  "Virtuosic",
+  "Rapturous",
+  "Flawless",
+  "Majestic",
+  "Splendiferous",
+  "Badass",
+  "Legendary",
+  "Kickass"
+];
+
+export { ListMsg };
