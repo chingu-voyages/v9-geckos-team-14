@@ -19,8 +19,7 @@ export default class ColorShades extends Component {
   render() {
     const { background, name } = this.props;
     const { isCopied } = this.state;
-    const msg = ["Hurray thats awsome", "Bingo", "Mind Blowing", "Frozen"];
-    const randMsg = ListMsg[(Math.random() * msg.length) | 0];
+    const randMsg = ListMsg[(Math.random() * ListMsg.length) | 0];
     return (
       <CopyToClipboard text={background} onCopy={this.onCopyHandler}>
         <div style={{ background }} className="ColorShades">
@@ -35,7 +34,7 @@ export default class ColorShades extends Component {
           <div className="color-content">
             <span>{name}</span>
           </div>
-          <button className="copy-btn">Copy</button>
+          <button className="copy-btn">copy</button>
         </div>
       </CopyToClipboard>
     );
