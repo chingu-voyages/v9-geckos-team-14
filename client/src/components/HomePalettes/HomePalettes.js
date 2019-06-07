@@ -7,7 +7,7 @@ const styles = {
     border: "2px solid #000",
     borderRadius: "5%",
     fontSize: "300",
-    padding: "0.5rem",
+    // padding: "0.5rem",
     overflow: "hidden",
     position: "relative",
     "&:hover": {
@@ -17,7 +17,7 @@ const styles = {
   colors: {
     backgroundColor: "grey",
     height: "170px",
-    width: "100%",
+    width: "126%",
     borderRadius: "5px",
     overflow: "hidden"
   },
@@ -37,7 +37,8 @@ const styles = {
     display: "inline-block",
     margin: "0 auto",
     position: "relative",
-    marginBottom: "-3.5px"
+    marginBottom: "-3.5px",
+    border: "0.1px groove #000"
   }
 };
 

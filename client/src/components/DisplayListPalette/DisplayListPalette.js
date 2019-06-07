@@ -4,8 +4,8 @@ import { withStyles } from "@material-ui/styles";
 import HomePalettes from "../HomePalettes/HomePalettes";
 const styles = {
   root: {
-    backgroundColor: "#c9621a",
-    height: "100%",
+    background: "linear-gradient(to right, #007991, #78ffd6)",
+    minHeight: "100vh",
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center"
@@ -25,10 +25,11 @@ const styles = {
   },
   colorPalettes: {
     boxSizing: "border-box",
+
     width: "100%",
     display: "grid",
     gridTemplateColumns: "repeat(4, 25%)",
-    gridGap: "2%"
+    gridGap: "1.5%"
   }
 };
 class DisplayListPalette extends Component {
