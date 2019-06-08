@@ -5,6 +5,7 @@ import MainPalette from "./components/Palette/MainPalette";
 import ListColors from "./resources/ListColors";
 import { generatePalette } from "./resources/Helper";
 import DisplayListPalette from "./components/DisplayListPalette/DisplayListPalette";
+import Login from "./components/Login/Login";
 
 class App extends React.Component {
   findPalette(id) {
@@ -16,27 +17,30 @@ class App extends React.Component {
     // console.log("test" + JSON.stringify(generatePalette(ListColors[0])));
 
     return (
-      <Switch>
-        {" "}
-        <Route
-          exact
-          path="/"
-          render={routeProps => (
-            <DisplayListPalette listPalettes={ListColors} {...routeProps} />
-          )}
-        />
-        <Route
-          exact
-          path="/palette/:id"
-          render={routeProps => (
-            <MainPalette
-              palette={generatePalette(
-                this.findPalette(routeProps.match.params.id)
-              )}
-            />
-          )}
-        />
-      </Switch>
+      <div>
+        <Login />
+        <Switch>
+          {" "}
+          <Route
+            exact
+            path="/"
+            render={routeProps => (
+              <DisplayListPalette listPalettes={ListColors} {...routeProps} />
+            )}
+          />
+          <Route
+            exact
+            path="/palette/:id"
+            render={routeProps => (
+              <MainPalette
+                palette={generatePalette(
+                  this.findPalette(routeProps.match.params.id)
+                )}
+              />
+            )}
+          />
+        </Switch>
+      </div>
 
       // <div className="App">
       //   <MainPalette {...ListColors[0]} />
