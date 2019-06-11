@@ -7,6 +7,7 @@ import ListColors from "./resources/ListColors";
 import { generatePalette } from "./resources/Helper";
 import DisplayListPalette from "./components/DisplayListPalette/DisplayListPalette";
 import Header from "./components/Header/Header";
+import Login from "./components/Login/Login";
 
 class App extends React.Component {
   findPalette(id) {
@@ -39,6 +40,7 @@ class App extends React.Component {
               />
             )}
           />
+          <Route exact path="/login" component={Login} />
         </Switch>
       </div>
 
