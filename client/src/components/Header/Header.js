@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Login from "../Login/Login";
 import "./Header.css";
 
 export default class Header extends Component {
@@ -15,7 +17,7 @@ export default class Header extends Component {
               Palletes
             </Typography>
             <div>
-              <Button size="small">Sign In</Button>
+              <Link to="/login">Login</Link>
             </div>
           </Toolbar>
         </Container>

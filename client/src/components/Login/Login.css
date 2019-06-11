@@ -1,0 +1,50 @@
+.login-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+.login {
+  width: 280px;
+  min-height: 300px;
+  background-color: #fff;
+  margin-top: 5rem;
+  padding: 2rem;
+}
+
+.login h6 {
+  text-align: center;
+}
+
+.login .login__input {
+  margin-bottom: 1.4rem;
+  width: 100%;
+}
+
+.login .login__swiperToggle {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.login .login__swiperToggle span {
+  margin: 0.2rem 0.3rem;
+  display: inline-block;
+}
+
+.login .login__swiperToggle-link {
+  color: #2196f3;
+}
+
+.login .login__swiperToggle-link:hover,
+.login .login__swiperToggle-link:focus {
+  color: #212cf2;
+  cursor: pointer;
+}
+
+.login .login__btn {
+  width: 80%;
+  margin: 1rem auto;
+  display: block;
+}

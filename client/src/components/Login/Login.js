@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 import { getFromStorage, setInStorage } from "../../resources/Helper";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import SwipeableViews from "react-swipeable-views";
+import Button from "@material-ui/core/Button";
+import "./Login.css";
 
 // TODO: Separate to multiple components
 class Login extends Component {
@@ -14,13 +19,15 @@ class Login extends Component {
       signInPassword: "",
       signUpMessage: "",
       signUpEmail: "",
-      signUpPassword: ""
+      signUpPassword: "",
+      swipeIndex: 0
     };
 
     this.onChangeSignInEmail = this.onChangeSignInEmail.bind(this);
     this.onChangeSignInPassword = this.onChangeSignInPassword.bind(this);
     this.onChangeSignUpEmail = this.onChangeSignUpEmail.bind(this);
     this.onChangeSignUpPassword = this.onChangeSignUpPassword.bind(this);
+    this.handleSwiperChangeIndex = this.handleSwiperChangeIndex.bind(this);
 
     this.onSignIn = this.onSignIn.bind(this);
     this.onSignUp = this.onSignUp.bind(this);
@@ -73,6 +80,12 @@ class Login extends Component {
   onChangeSignUpPassword(event) {
     this.setState({
       signUpPassword: event.target.value
+    });
+  }
+
+  handleSwiperChangeIndex(index) {
+    this.setState({
+      swipeIndex: index
     });
   }
 
@@ -166,8 +179,94 @@ class Login extends Component {
       signInPassword,
       signUpMessage,
       signUpEmail,
-      signUpPassword
+      signUpPassword,
+      swipeIndex
     } = this.state;
+
+    return (
+      <div className="login-wrapper">
+        <div className="login">
+          <SwipeableViews axis="x" index={swipeIndex}>
+            <div className="signin">
+              <Typography variant="h6" gutterBottom>
+                Sign In
+              </Typography>
+              <TextField id="email" className="login__input" label="Email" />
+              <TextField
+                id="password"
+                className="login__input"
+                display="block"
+                label="Password"
+              />
+              <Button
+                variant="contained"
+                color="default"
+                className="login__btn"
+              >
+                Sign In
+              </Button>
+              <Typography
+                variant="caption"
+                display="inline"
+                gutterBottom
+                className="login__swiperToggle"
+              >
+                <span>Don't have an account?</span>
+                <span
+                  className="login__swiperToggle-link"
+                  onClick={() => this.handleSwiperChangeIndex(1)}
+                >
+                  Sign Up
+                </span>
+              </Typography>
+            </div>
+
+            <div className="signup">
+              <Typography variant="h6" gutterBottom>
+                Sign Up
+              </Typography>
+              <TextField id="email" className="login__input" label="Email" />
+              <TextField
+                id="username"
+                className="login__input"
+                label="Username"
+              />
+              <TextField
+                id="password"
+                className="login__input"
+                label="Password"
+              />
+              <TextField
+                id="password_repeat"
+                className="login__input"
+                label="Repeat password"
+              />
+              <Button
+                variant="contained"
+                color="default"
+                className="login__btn"
+              >
+                Sign Up
+              </Button>
+              <Typography
+                variant="caption"
+                display="inline"
+                gutterBottom
+                className="login__swiperToggle"
+              >
+                <span>Already have an account?</span>
+                <span
+                  className="login__swiperToggle-link"
+                  onClick={() => this.handleSwiperChangeIndex(0)}
+                >
+                  Sign In
+                </span>
+              </Typography>
+            </div>
+          </SwipeableViews>
+        </div>
+      </div>
+    );
 
     if (loading) {
       return (
