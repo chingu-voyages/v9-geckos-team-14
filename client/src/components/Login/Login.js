@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { getFromStorage, setInStorage } from "../../resources/Helper";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import SwipeableViews from "react-swipeable-views";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
 import "./Login.css";
 
@@ -14,19 +16,56 @@ class Login extends Component {
     this.state = {
       loading: true,
       token: "",
-      signInMessage: "",
-      signInEmail: "",
-      signInPassword: "",
-      signUpMessage: "",
-      signUpEmail: "",
-      signUpPassword: "",
+      signInStatus: {
+        username: {
+          ok: true,
+          value: "",
+          message: ""
+        },
+        password: {
+          ok: true,
+          value: "",
+          message: ""
+        }
+      },
+      signUpStatus: {
+        email: {
+          ok: true,
+          value: "",
+          message: ""
+        },
+        username: {
+          ok: true,
+          value: "",
+          message: ""
+        },
+        password: {
+          ok: true,
+          value: "",
+          message: ""
+        },
+        repeat: {
+          ok: true,
+          value: "",
+          message: ""
+        }
+      },
+      signUpPasswordsMatch: true,
+      signUpReady: false,
       swipeIndex: 0
     };
 
-    this.onChangeSignInEmail = this.onChangeSignInEmail.bind(this);
+    this.onChangeSignInUsername = this.onChangeSignInUsername.bind(this);
     this.onChangeSignInPassword = this.onChangeSignInPassword.bind(this);
+
     this.onChangeSignUpEmail = this.onChangeSignUpEmail.bind(this);
+    this.onChangeSignUpUsername = this.onChangeSignUpUsername.bind(this);
     this.onChangeSignUpPassword = this.onChangeSignUpPassword.bind(this);
+    this.onChangeSignUpPasswordRepeat = this.onChangeSignUpPasswordRepeat.bind(
+      this
+    );
+    this.checkSignUpReady = this.checkSignUpReady.bind(this);
+
     this.handleSwiperChangeIndex = this.handleSwiperChangeIndex.bind(this);
 
     this.onSignIn = this.onSignIn.bind(this);
@@ -59,27 +98,57 @@ class Login extends Component {
     }
   }
 
-  onChangeSignInEmail(event) {
+  onChangeSignInUsername(event) {
+    const { signInStatus } = this.state;
+    signInStatus.username.value = event.target.value;
     this.setState({
-      signInEmail: event.target.value
+      signInStatus: signInStatus
     });
   }
 
   onChangeSignInPassword(event) {
+    const { signInStatus } = this.state;
+    signInStatus.password.value = event.target.value;
     this.setState({
-      signInPassword: event.target.value
+      signInStatus: signInStatus
     });
   }
 
   onChangeSignUpEmail(event) {
+    const { signUpStatus } = this.state;
+    signUpStatus.email.value = event.target.value;
     this.setState({
-      signUpEmail: event.target.value
+      signUpStatus: signUpStatus
+    });
+  }
+
+  onChangeSignUpUsername(event) {
+    const { signUpStatus } = this.state;
+    signUpStatus.username.value = event.target.value;
+    this.setState({
+      signUpStatus: signUpStatus
     });
   }
 
   onChangeSignUpPassword(event) {
+    const { signUpStatus } = this.state;
+    signUpStatus.password.value = event.target.value;
     this.setState({
-      signUpPassword: event.target.value
+      signUpStatus: signUpStatus
+    });
+  }
+
+  onChangeSignUpPasswordRepeat(event) {
+    const { signUpStatus } = this.state;
+    signUpStatus.repeat.value = event.target.value;
+    const { password, repeat } = signUpStatus;
+    if (password.value !== repeat.value) {
+      signUpStatus.repeat.ok = false;
+    } else {
+      signUpStatus.repeat.ok = true;
+    }
+    this.setState({
+      signUpStatus: signUpStatus
     });
   }
 
@@ -89,8 +158,23 @@ class Login extends Component {
     });
   }
 
+  checkSignUpReady(event) {
+    const { email, username, password, repeat } = this.state.signUpStatus;
+    const passwordsMatch = password.value === repeat.value;
+
+    if (email.value && username.value && password.value && passwordsMatch) {
+      this.setState({
+        signUpReady: true
+      });
+    } else {
+      this.setState({
+        signUpReady: false
+      });
+    }
+  }
+
   onSignUp(event) {
-    const { signUpEmail, signUpPassword } = this.state;
+    const { signUpStatus, signUpPasswordsMatch } = this.state;
 
     this.setState({
       loading: true
@@ -103,25 +187,31 @@ class Login extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        email: signUpEmail,
-        password: signUpPassword
+        email: signUpStatus.email.value,
+        username: signUpStatus.username.value,
+        password: signUpStatus.password.value
       })
     })
       .then(res => res.json())
       .then(json => {
+        console.log(json);
+        signUpStatus.email.ok = json.email.ok;
+        signUpStatus.email.message = json.email.message;
+        signUpStatus.username.ok = json.username.ok;
+        signUpStatus.username.message = json.username.message;
+        signUpStatus.password.ok = json.password.ok;
+        signUpStatus.password.message = json.password.message;
         this.setState({
-          signUpMessage: json.message,
-          loading: false
+          loading: false,
+          signUpStatus: signUpStatus
         });
       });
   }
 
   onSignIn(event) {
-    const { signInEmail, signInPassword } = this.state;
+    const { signInStatus } = this.state;
 
-    this.setState({
-      loading: true
-    });
+    this.setState({ loading: true });
 
     // post request
     fetch("/api/account/signin", {
@@ -130,18 +220,27 @@ class Login extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        email: signInEmail,
-        password: signInPassword
+        username: signInStatus.username.value,
+        password: signInStatus.password.value
       })
     })
       .then(res => res.json())
       .then(json => {
+        console.log(json);
         setInStorage("main_app_token", { token: json.token });
-        this.setState({
-          signUpMessage: json.message,
-          loading: false,
-          token: json.token
-        });
+        signInStatus.username.ok = json.username.ok;
+        signInStatus.username.message = json.username.message;
+        signInStatus.password.ok = json.password.ok;
+        signInStatus.password.message = json.password.message;
+
+        setTimeout(() => {
+          this.setState({
+            loading: false,
+            success: json.success,
+            token: json.token,
+            signInStatus: signInStatus
+          });
+        }, 1000);
       });
   }
 
@@ -174,14 +273,15 @@ class Login extends Component {
     const {
       loading,
       token,
-      signInMessage,
-      signInEmail,
-      signInPassword,
-      signUpMessage,
-      signUpEmail,
-      signUpPassword,
+      signInStatus,
+      signUpStatus,
+      signUpReady,
       swipeIndex
     } = this.state;
+
+    if (token) {
+      return <Redirect to="/" />;
+    }
 
     return (
       <div className="login-wrapper">
@@ -191,19 +291,46 @@ class Login extends Component {
               <Typography variant="h6" gutterBottom>
                 Sign In
               </Typography>
-              <TextField id="email" className="login__input" label="Email" />
+              <TextField
+                id="username"
+                className="login__input"
+                label={
+                  signInStatus.username.message
+                    ? signInStatus.username.message
+                    : "Username"
+                }
+                error={!signInStatus.username.ok}
+                value={signInStatus.username.value}
+                onChange={this.onChangeSignInUsername}
+              />
               <TextField
                 id="password"
                 className="login__input"
-                display="block"
-                label="Password"
+                label={
+                  signInStatus.password.message
+                    ? signInStatus.password.message
+                    : "Password"
+                }
+                type="password"
+                error={!signInStatus.password.ok}
+                value={signInStatus.password.value}
+                onChange={this.onChangeSignInPassword}
               />
               <Button
                 variant="contained"
-                color="default"
+                color="primary"
                 className="login__btn"
+                onClick={this.onSignIn}
               >
-                Sign In
+                {loading ? (
+                  <CircularProgress
+                    size={24}
+                    color="inherit"
+                    className="login__loading"
+                  />
+                ) : (
+                  "Sign In"
+                )}
               </Button>
               <Typography
                 variant="caption"
@@ -221,32 +348,70 @@ class Login extends Component {
               </Typography>
             </div>
 
-            <div className="signup">
+            <div className="signup" onChange={this.checkSignUpReady}>
               <Typography variant="h6" gutterBottom>
                 Sign Up
               </Typography>
-              <TextField id="email" className="login__input" label="Email" />
+              <TextField
+                id="email"
+                className="login__input"
+                label={
+                  signUpStatus.email.message
+                    ? signUpStatus.email.message
+                    : "Email"
+                }
+                error={!signUpStatus.email.ok}
+                value={signUpStatus.email.value}
+                onChange={this.onChangeSignUpEmail}
+              />
               <TextField
                 id="username"
                 className="login__input"
-                label="Username"
+                label={
+                  signUpStatus.username.message
+                    ? signUpStatus.username.message
+                    : "Username"
+                }
+                error={!signUpStatus.username.ok}
+                value={signUpStatus.username.value}
+                onChange={this.onChangeSignUpUsername}
               />
               <TextField
                 id="password"
                 className="login__input"
-                label="Password"
+                type="password"
+                label={
+                  signUpStatus.password.message
+                    ? signUpStatus.password.message
+                    : "Password"
+                }
+                error={!signUpStatus.password.ok}
+                onChange={this.onChangeSignUpPassword}
               />
               <TextField
                 id="password_repeat"
                 className="login__input"
+                type="password"
                 label="Repeat password"
+                error={!signUpStatus.repeat.ok}
+                onChange={this.onChangeSignUpPasswordRepeat}
               />
               <Button
                 variant="contained"
-                color="default"
+                color="primary"
                 className="login__btn"
+                disabled={!signUpReady}
+                onClick={this.onSignUp}
               >
-                Sign Up
+                {loading ? (
+                  <CircularProgress
+                    size={24}
+                    color="inherit"
+                    className="login__loading"
+                  />
+                ) : (
+                  "Sign Up"
+                )}
               </Button>
               <Typography
                 variant="caption"
@@ -265,66 +430,6 @@ class Login extends Component {
             </div>
           </SwipeableViews>
         </div>
-      </div>
-    );
-
-    if (loading) {
-      return (
-        <div>
-          <p>loading...</p>
-        </div>
-      );
-    }
-
-    if (!token) {
-      return (
-        <div>
-          <div>
-            {signInMessage ? <p>{signInMessage}</p> : null}
-            <p>Sign In</p>
-            <input
-              type="email"
-              placeholder="Email"
-              value={signInEmail}
-              onChange={this.onChangeSignInEmail}
-            />
-            <br />
-            <input
-              type="password"
-              placeholder="Password"
-              value={signInPassword}
-              onChange={this.onChangeSignInPassword}
-            />
-            <br />
-            <button onClick={this.onSignIn}>Sign In</button>
-          </div>
-          <div>
-            {signUpMessage ? <p>{signUpMessage}</p> : null}
-            <p>Sign up</p>
-            <input
-              type="email"
-              placeholder="Email"
-              value={signUpEmail}
-              onChange={this.onChangeSignUpEmail}
-            />
-            <br />
-            <input
-              type="password"
-              placeholder="Password"
-              value={signUpPassword}
-              onChange={this.onChangeSignUpPassword}
-            />
-            <br />
-            <button onClick={this.onSignUp}>Sign Up</button>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <div>
-        <p>Account</p>
-        <button onClick={this.onLogout}>Logout</button>
       </div>
     );
   }

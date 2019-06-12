@@ -45,6 +45,16 @@
 
 .login .login__btn {
   width: 80%;
+  min-height: 36.5px;
   margin: 1rem auto;
+  margin-top: 0;
   display: block;
+}
+
+.login .login__loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -12px;
+  margin-left: -12px;
 }
