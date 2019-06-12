@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import HomePalettes from "../HomePalettes/HomePalettes";
+import CreatePaletteModel from "../HOC/Model";
 const styles = {
   "@global": {
     "fade-exit": {
@@ -50,7 +51,9 @@ class DisplayListPalette extends Component {
       <div className={classes.root}>
         <div className={classes.container}>
           <nav className={classes.nav}>
-            <h1>Navbar</h1>
+            <h1>
+              <CreatePaletteModel />
+            </h1>
           </nav>
           <div className={classes.colorPalettes}>
             {listPalettes.map(palette => (
