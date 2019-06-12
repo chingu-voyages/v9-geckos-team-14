@@ -9,56 +9,89 @@ const UserSession = require("../../models/UserSession");
 router.post("/signup", (req, res, next) => {
   const { body } = req;
   const { password } = body;
+  const { username } = body;
   let { email } = body;
+  let readyToProceed = true;
+
+  const result = {
+    success: false,
+    message: "",
+    email: {
+      ok: true,
+      message: ""
+    },
+    username: {
+      ok: true,
+      message: ""
+    },
+    password: {
+      ok: true,
+      message: ""
+    }
+  };
 
   if (!email) {
-    return res.send({
-      success: false,
-      message: "Email is required."
-    });
+    readyToProceed = false;
+    result.email.ok = false;
+    result.email.message = "Email is required.";
   }
-  if (!password) {
-    return res.send({
-      success: false,
-      message: "Password is required."
-    });
+
+  if (!username) {
+    readyToProceed = false;
+    result.username.ok = false;
+    result.username.message = "Username is required.";
+  }
+
+  if (!password || password.length < 6) {
+    readyToProceed = false;
+    result.password.ok = false;
+    result.password.message = "Minimum 6 characters long.";
+  }
+
+  if (!readyToProceed) {
+    return res.send(result);
   }
 
   email = email.toLowerCase();
   email = email.trim();
 
   User.find(
-    {
-      email: email
-    },
-    (err, previousUsers) => {
+    { $or: [{ email: email }, { username: username }] },
+    (err, users) => {
       if (err) {
-        return res.send({
-          success: false,
-          message: "Server error"
+        result.message = "Server error.";
+        return res.send(result);
+      } else if (users.length > 0) {
+        users.map(user => {
+          if (user.email == email) {
+            result.email = {
+              ok: false,
+              message: "This email already exists."
+            };
+          }
+          if (user.username == username) {
+            result.username = {
+              ok: false,
+              message: "This username already exists."
+            };
+          }
         });
-      } else if (previousUsers.length > 0) {
-        return res.send({
-          success: false,
-          message: "Account already exist."
-        });
+        return res.send(result);
       }
 
       const newUser = new User();
 
       newUser.email = email;
+      newUser.username = username;
       newUser.password = newUser.generateHash(password);
       newUser.save((err, user) => {
         if (err) {
-          return res.send({
-            success: false,
-            message: "Server error"
-          });
+          result.message = "Server error";
+          return res.send(result);
         }
-        return res.send({
-          success: true,
-          message: "Signed up"
-        });
+        result.success = true;
+        result.message = "Signed up";
+        return res.send(result);
       });
     }
   );
@@ -69,63 +102,70 @@ router.post("/signup", (req, res, next) => {
 // @access Public
 router.post("/signin", (req, res, next) => {
   const { body } = req;
-  const { password } = body;
-  let { email } = body;
+  const { username, password } = body;
+  let readyToProceed = true;
 
-  email = email.toLowerCase();
-  email = email.trim();
+  const result = {
+    success: false,
+    message: "",
+    username: {
+      ok: true,
+      message: ""
+    },
+    password: {
+      ok: true,
+      message: ""
+    },
+    token: ""
+  };
 
-  if (!email) {
-    return res.send({
-      success: false,
-      message: "Email is required."
-    });
+  if (!username) {
+    readyToProceed = false;
+    result.username.ok = false;
+    result.username.message = "Username is required.";
   }
+
   if (!password) {
-    return res.send({
-      success: false,
-      message: "Password is required."
-    });
+    readyToProceed = false;
+    result.password.ok = false;
+    result.password.message = "Password is required.";
   }
 
-  User.find({ email }, (err, users) => {
+  if (!readyToProceed) {
+    return res.send(result);
+  }
+
+  User.find({ username }, (err, users) => {
     if (err) {
-      return res.send({
-        success: false,
-        message: "Server error"
-      });
+      result.message = "Server error";
+      return res.send(result);
     }
 
     if (users.length != 1) {
-      return res.send({
-        success: false,
-        message: "Invalid"
-      });
+      result.username.message = "Invalid username";
+      result.username.ok = false;
+      return res.send(result);
     }
 
     const user = users[0];
     if (!user.validPassword(password)) {
-      return res.send({
-        success: false,
-        message: "Invalid"
-      });
+      result.password.message = "Invalid password";
+      result.password.ok = false;
+      return res.send(result);
     }
 
     const userSession = new UserSession();
     userSession.userId = user._id;
     userSession.save((err, doc) => {
       if (err) {
-        return res.send({
-          success: false,
-          message: "Server error"
-        });
+        result.message = "Server error";
+        return res.send(result);
       }
 
-      return res.send({
-        success: true,
-        message: "Singed in",
-        token: doc._id
-      });
+      result.success = true;
+      result.message = "Singed in";
+      result.token = doc._id;
+      return res.send(result);
     });
   });
 });
