@@ -1,0 +1,12 @@
+.Navbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 6vh;
+    background-color: #fff;
+}
+.ui.button {
+    font-size: 40px;
+    background: #fff !important;
+    color: #000;
+}

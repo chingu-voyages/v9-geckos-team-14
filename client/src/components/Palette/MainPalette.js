@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./MainPalette.css";
 import ColorShades from "../ColorShades/ColorShades";
+import Navbar from "../Navbar/Navbar";
 
 export default class MainPalette extends Component {
   state = {
@@ -13,6 +14,7 @@ export default class MainPalette extends Component {
     ));
     return (
       <div className="main-pallete">
+        <Navbar />
         <div className="color-pallete">{displayColors}</div>
       </div>
     );
