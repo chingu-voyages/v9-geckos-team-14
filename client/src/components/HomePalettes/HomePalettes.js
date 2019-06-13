@@ -6,9 +6,10 @@ const styles = {
     height: "100%",
     backgroundColor: "#f7f2c5",
     border: "1px solid #000",
-    borderRadius: "5%",
+    borderRadius: "8%",
     // padding: "0.5rem",
     overflow: "hidden",
+    width: "220px",
     position: "relative",
     "&:hover": {
       cursor: "pointer"
@@ -16,9 +17,9 @@ const styles = {
   },
   colors: {
     backgroundColor: "grey",
-    height: "170px",
+    height: "155px",
     width: "126%",
-    borderRadius: "5px",
+    // borderRadius: "5%",
     overflow: "hidden"
   },
   title: {
