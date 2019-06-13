@@ -4,8 +4,6 @@ import { getFromStorage, isAuthorized } from "../../resources/Helper";
 import Container from "@material-ui/core/Container";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Login from "../Login/Login";
 import "./Header.css";
 
 export default class Header extends Component {

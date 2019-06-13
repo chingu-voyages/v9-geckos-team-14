@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import { getFromStorage, setInStorage } from "../../resources/Helper";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -72,7 +71,6 @@ class Login extends Component {
 
     this.onSignIn = this.onSignIn.bind(this);
     this.onSignUp = this.onSignUp.bind(this);
-    this.onLogout = this.onLogout.bind(this);
   }
 
   componentDidMount() {
@@ -190,7 +188,7 @@ class Login extends Component {
   }
 
   onSignUp(event) {
-    const { signUpStatus, signUpPasswordsMatch } = this.state;
+    const { signUpStatus } = this.state;
 
     this.setState({
       loading: true
@@ -258,31 +256,6 @@ class Login extends Component {
           });
         }, 1000);
       });
-  }
-
-  onLogout(event) {
-    const obj = getFromStorage("main_app_token");
-    if (obj && obj.token) {
-      const { token } = obj;
-      fetch(`/api/account/logout?token=${token}`)
-        .then(res => res.json())
-        .then(json => {
-          if (json.success) {
-            this.setState({
-              token: "",
-              loading: false
-            });
-          } else {
-            this.setState({
-              loading: false
-            });
-          }
-        });
-    } else {
-      this.setState({
-        loading: false
-      });
-    }
   }
 
   render() {
