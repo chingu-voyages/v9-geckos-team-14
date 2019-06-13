@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { getFromStorage, isAuthorized } from "../../resources/Helper";
+import { getFromStorage } from "../../resources/Helper";
 import Container from "@material-ui/core/Container";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -9,8 +9,13 @@ import "./Header.css";
 export default class Header extends Component {
   constructor(props) {
     super(props);
+
+    const { token, username } = getFromStorage("main_app_token");
+
     this.state = {
-      authorized: isAuthorized()
+      authorized: token ? true : false,
+      token: token,
+      username: username
     };
 
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
@@ -18,8 +23,7 @@ export default class Header extends Component {
 
   handleLogoutClick(event) {
     if (this.state.authorized) {
-      const { token } = getFromStorage("main_app_token");
-      fetch(`/api/account/logout?token=${token}`)
+      fetch(`/api/account/logout?token=${this.state.token}`)
         .then(res => res.json())
         .then(json => {
           localStorage.removeItem("main_app_token");
@@ -36,7 +40,7 @@ export default class Header extends Component {
     const { authorized } = this.state;
     const profileLink = (
       <Typography className="profile-btn" onClick={this.handleLogoutClick}>
-        Authorized
+        {this.state.username}
       </Typography>
     );
     const loginLink = (

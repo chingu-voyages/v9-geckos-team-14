@@ -241,7 +241,10 @@ class Login extends Component {
       .then(res => res.json())
       .then(json => {
         console.log(json);
-        setInStorage("main_app_token", { token: json.token });
+        setInStorage("main_app_token", {
+          token: json.token,
+          username: json.username
+        });
         signInStatus.username.ok = json.username.ok;
         signInStatus.username.message = json.username.message;
         signInStatus.password.ok = json.password.ok;

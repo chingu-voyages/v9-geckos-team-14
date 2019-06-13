@@ -165,6 +165,7 @@ router.post("/signin", (req, res, next) => {
       result.success = true;
       result.message = "Singed in";
       result.token = doc._id;
+      result.username = user.username;
       return res.send(result);
     });
   });
