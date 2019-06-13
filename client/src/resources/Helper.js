@@ -75,4 +75,13 @@ function setInStorage(key, obj) {
   }
 }
 
-export { generatePalette, getFromStorage, setInStorage };
+function isAuthorized() {
+  const obj = getFromStorage("main_app_token");
+  if (obj && obj.token) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export { generatePalette, getFromStorage, setInStorage, isAuthorized };

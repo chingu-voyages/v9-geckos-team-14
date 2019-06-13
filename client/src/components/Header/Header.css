@@ -6,3 +6,27 @@ header {
 .header {
   justify-content: space-between;
 }
+
+.header .logo-link > a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #000;
+}
+
+.header .profile-btn {
+  text-decoration: none;
+  color: #000;
+}
+
+.header .profile-btn:hover {
+  cursor: pointer;
+}
+
+.header .login-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.header .login-link:hover {
+  cursor: pointer;
+}

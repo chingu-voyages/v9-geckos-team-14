@@ -297,7 +297,7 @@ class Login extends Component {
     } = this.state;
 
     if (token) {
-      return <Redirect to="/" />;
+      window.location = "/";
     }
 
     return (
