@@ -52,6 +52,7 @@ class Login extends Component {
       },
       signUpPasswordsMatch: true,
       signUpReady: false,
+      signInReady: false,
       swipeIndex: 0
     };
 
@@ -65,6 +66,7 @@ class Login extends Component {
       this
     );
     this.checkSignUpReady = this.checkSignUpReady.bind(this);
+    this.checkSignInReady = this.checkSignInReady.bind(this);
 
     this.handleSwiperChangeIndex = this.handleSwiperChangeIndex.bind(this);
 
@@ -156,6 +158,20 @@ class Login extends Component {
     this.setState({
       swipeIndex: index
     });
+  }
+
+  checkSignInReady(event) {
+    const { username, password } = this.state.signInStatus;
+
+    if (username.value && password.value) {
+      this.setState({
+        signInReady: true
+      });
+    } else {
+      this.setState({
+        signInReady: false
+      });
+    }
   }
 
   checkSignUpReady(event) {
@@ -275,6 +291,7 @@ class Login extends Component {
       token,
       signInStatus,
       signUpStatus,
+      signInReady,
       signUpReady,
       swipeIndex
     } = this.state;
@@ -287,7 +304,7 @@ class Login extends Component {
       <div className="login-wrapper">
         <div className="login">
           <SwipeableViews axis="x" index={swipeIndex}>
-            <div className="signin">
+            <div className="signin" onChange={this.checkSignInReady}>
               <Typography variant="h6" gutterBottom>
                 Sign In
               </Typography>
@@ -320,6 +337,7 @@ class Login extends Component {
                 variant="contained"
                 color="primary"
                 className="login__btn"
+                disabled={!signInReady}
                 onClick={this.onSignIn}
               >
                 {loading ? (
