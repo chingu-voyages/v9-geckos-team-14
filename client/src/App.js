@@ -1,10 +1,12 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import "./normalize.css";
 import "./App.css";
 import MainPalette from "./components/Palette/MainPalette";
 import ListColors from "./resources/ListColors";
 import { generatePalette } from "./resources/Helper";
 import DisplayListPalette from "./components/DisplayListPalette/DisplayListPalette";
+import Header from "./components/Header/Header";
 import Login from "./components/Login/Login";
 
 class App extends React.Component {
@@ -18,9 +20,8 @@ class App extends React.Component {
 
     return (
       <div>
-        <Login />
+        <Header />
         <Switch>
-          {" "}
           <Route
             exact
             path="/"
@@ -39,6 +40,7 @@ class App extends React.Component {
               />
             )}
           />
+          <Route exact path="/login" component={Login} />
         </Switch>
       </div>
 
