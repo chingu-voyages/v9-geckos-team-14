@@ -59,8 +59,8 @@ router.post("/new", (req, res) => {
     });
 });
 
-// @route POST api/palletes/remove/:id
-// @desc Remove a pallete
+// @route POST api/palletes/delete/:id
+// @desc Delete pallete by ID
 // @access protected
 router.post("/delete", (req, res) => {
   const { palleteId, token } = req.body;
