@@ -7,6 +7,7 @@ import { generatePalette } from "./resources/Helper";
 import DisplayListPalette from "./components/DisplayListPalette/DisplayListPalette";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import CreatePalette from "./components/CreatePalette/CreatePalette";
 
 class App extends React.Component {
   findPalette(id) {
@@ -21,6 +22,11 @@ class App extends React.Component {
           <TransitionGroup>
             <CSSTransition classNames="fade" timeout={500} key={location.key}>
               <Switch>
+                <Route
+                  exact
+                  path="/palette/new"
+                  render={() => <CreatePalette />}
+                />
                 <Route
                   exact
                   path="/"

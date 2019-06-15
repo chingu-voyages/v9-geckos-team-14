@@ -5,6 +5,10 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+if (module.hot) {
+  module.hot.accept();
+}
+
 ReactDOM.render(
   <BrowserRouter>
     <App />

@@ -30,7 +30,10 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     width: "100%",
-    color: "#fff"
+    color: "#fff",
+    "& a": {
+      color: "#fff"
+    }
   },
   colorPalettes: {
     boxSizing: "border-box",
@@ -52,7 +55,8 @@ class DisplayListPalette extends Component {
         <div className={classes.container}>
           <nav className={classes.nav}>
             <h1>
-              <CreatePaletteModel />
+              {/* <CreatePaletteModel /> */}
+              <Link to="/palette/new">Create Your Palette</Link>
             </h1>
           </nav>
           <div className={classes.colorPalettes}>
