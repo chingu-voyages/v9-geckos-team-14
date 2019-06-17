@@ -8,8 +8,8 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "mocha",
-    "test:watch": "mocha --watch"
+    "test": "mocha --recursive",
+    "test:watch": "mocha --recursive --watch"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
