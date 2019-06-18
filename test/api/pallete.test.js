@@ -1,6 +1,5 @@
 const request = require("supertest");
 const assert = require("chai").assert;
-const mongoose = require("mongoose");
 const express = require("express");
 const palletes = require("../../routes/api/palletes");
 const Pallete = require("../../models/Pallete");
@@ -14,33 +13,6 @@ app.use("/api/palletes", palletes);
 describe("API Palletes", function() {
   // eslint-disable-next-line no-invalid-this
   this.timeout(10000);
-
-  before("Prepare DB", function() {
-    const db = require("../../config/keys").mongoURItest;
-    mongoose
-      .connect(db, { useNewUrlParser: true, useFindAndModify: false })
-      .then(() => {
-        const newPallete = new Pallete({
-          name: "Gruvbox",
-          author: "morhetz",
-          colors: [{ hex: "#282828", order: 0 }]
-        });
-        newPallete.save();
-      })
-      .catch(err => console.error(err));
-  });
-
-  after(function() {
-    mongoose.connection.db
-      .dropDatabase()
-      .then(() => {
-        mongoose.connection.close();
-      })
-      .catch(err => {
-        console.error(err);
-        mongoose.connection.close();
-      });
-  });
 
   describe("GET /api/palletes/all", function() {
     it("Should respond with status 200", function() {
@@ -63,11 +35,12 @@ describe("API Palletes", function() {
         });
     });
 
-    it("Response should not be empty", function() {
+    it.skip("Response should not be empty", function() {
       return request(app)
         .get("/api/palletes/all")
         .then(res => {
-          assert.isObject(res.body[0]);
+          const { body } = res;
+          assert.isObject(body[0]);
         });
     });
   });
@@ -156,6 +129,10 @@ describe("API Palletes", function() {
         .expect(201);
     });
 
+    it(
+      "Should respond with status 400 if Content-Type is not application/json"
+    );
+
     it.skip("Should respond with status 400 if no body", function() {
       return request(app)
         .post("/api/palletes/new")
@@ -216,5 +193,9 @@ describe("API Palletes", function() {
         })
         .catch(err => console.error(err));
     });
+  });
+
+  describe("POST /api/palletes/delete", function() {
+    it("Pallete delete test case");
   });
 });
