@@ -410,15 +410,70 @@ describe("API Account", function() {
   });
 
   describe("GET /api/account/verify", function() {
-    it("Should verify user by token");
-    it("Should not verify user if no token");
-    it("Should respond with status 200 if token is verified");
-    it("Should respond with status 400 if no token");
-    it("Should respond with status 400 if token is invalid");
+    it("Should verify user by token", function() {
+      const user = new User();
+      user.username = "randomusername01";
+      user.email = "randomusername01@colors.com";
+      user.password = user.generateHash("qwerty");
+      user.save();
+
+      const payload = {
+        username: "randomusername01",
+        password: "qwerty"
+      };
+
+      return request(app)
+        .post("/api/account/signin")
+        .send(payload)
+        .set({
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        })
+        .then(res => {
+          const { body } = res;
+          return request(app)
+            .get(`/api/account/verify?token=${body.token}`)
+            .expect(200)
+            .then(res => {
+              assert.isTrue(res.body.success);
+              assert(res.body.message, "Verified");
+            });
+        });
+    });
+
+    it.skip("Should not verify user if no token", function() {
+      return request(app)
+        .get(`/api/account/verify`)
+        .expect(400)
+        .then(res => {
+          assert.isFalse(res.body.success);
+          assert(res.body.message, "Invalid");
+        });
+    });
   });
 
   describe("GET /api/account/logout", function() {
-    it("Should logout the user by token");
-    it("Should respond with status 400 if no token");
+    it("Should logout the user by token", function() {
+      const session = new UserSession();
+      const token = session._id;
+
+      return request(app)
+        .get(`/api/account/logout?token=${token}`)
+        .expect(200)
+        .then(res => {
+          assert.isTrue(res.body.success);
+          assert(res.body.message, "Logged out");
+        });
+    });
+
+    it.skip("Should respond with status 400 if no token", function() {
+      return request(app)
+        .get(`/api/account/logout`)
+        .expect(400)
+        .then(res => {
+          assert.isFalse(res.body.success);
+          assert(res.body.message, "Invalid token");
+        });
+    });
   });
 });
