@@ -10,7 +10,16 @@ export default class Header extends Component {
   constructor(props) {
     super(props);
 
-    const { token, username } = getFromStorage("main_app_token");
+    let mainAppToken = getFromStorage("main_app_token");
+
+    if (mainAppToken == null) {
+      mainAppToken = {
+        token: "",
+        username: ""
+      };
+    }
+
+    const { token, username } = mainAppToken;
 
     this.state = {
       authorized: token ? true : false,
