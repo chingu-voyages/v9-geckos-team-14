@@ -60,7 +60,7 @@ export default class Header extends Component {
     return (
       <header>
         <Container maxWidth="lg">
-          <Toolbar className="header">
+          <Toolbar className="header" disableGutters={true}>
             <Typography className="logo-link" variant="h6" color="inherit">
               <Link to="/">Palletes</Link>
             </Typography>
