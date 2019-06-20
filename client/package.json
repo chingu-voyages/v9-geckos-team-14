@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.0.2",
     "@material-ui/styles": "^4.0.2",
+    "@material-ui/icons": "latest",
     "chroma-js": "^2.0.3",
     "react": "^16.8.6",
     "react-copy-to-clipboard": "^5.0.1",
