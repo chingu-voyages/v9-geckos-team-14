@@ -5,8 +5,8 @@ import "./App.css";
 import MainPalette from "./components/Palette/MainPalette";
 import ListColors from "./resources/ListColors";
 import { generatePalette } from "./resources/Helper";
-import DisplayListPalette from "./components/DisplayListPalette/DisplayListPalette";
 import Header from "./components/Header/Header";
+import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 
 class App extends React.Component {
@@ -22,13 +22,7 @@ class App extends React.Component {
       <div>
         <Header />
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={routeProps => (
-              <DisplayListPalette listPalettes={ListColors} {...routeProps} />
-            )}
-          />
+          <Route exact path="/" component={Home} />
           <Route
             exact
             path="/palette/:id"
