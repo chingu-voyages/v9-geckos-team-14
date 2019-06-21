@@ -2,24 +2,27 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
-  email: {
-    type: String,
-    default: ""
+const UserSchema = new Schema(
+  {
+    email: {
+      type: String,
+      default: ""
+    },
+    username: {
+      type: String,
+      default: ""
+    },
+    password: {
+      type: String,
+      default: ""
+    },
+    verified: {
+      type: Boolean,
+      default: false
+    }
   },
-  username: {
-    type: String,
-    default: ""
-  },
-  password: {
-    type: String,
-    default: ""
-  },
-  verified: {
-    type: Boolean,
-    default: false
-  }
-});
+  { timestamps: true }
+);
 
 UserSchema.methods.generateHash = function(password) {
   const salt = bcrypt.genSaltSync(8);
