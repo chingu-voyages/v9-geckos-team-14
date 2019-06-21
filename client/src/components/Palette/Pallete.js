@@ -33,7 +33,7 @@ export default class Palette extends Component {
   render() {
     return (
       <div className="pallete">
-        <Link to={`/pallete/${this.state.id}`}>
+        <Link to={`/pallete/${this.state.id}`} className="pallete__link">
           <span className="name">{this.props.name}</span>
           <div className="color-list">
             {this.props.colors.map((color, index) => {
