@@ -8,13 +8,18 @@
   margin: 0.8rem 0.5rem;
 }
 
+.pallete__link {
+  text-decoration: none;
+  color: #282828;
+}
+
 .pallete .name {
   font-size: 0.9rem;
   display: block;
   height: 30px;
   text-align: center;
   line-height: 30px;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .pallete .color-list {
