@@ -78,6 +78,7 @@ const THEMES = [
   },
   {
     name: "Solarized",
+    author: "Ethan Schoonover",
     colors: [
       { color: "#002b36", order: 1 },
       { color: "#073642", order: 2 },
@@ -95,6 +96,35 @@ const THEMES = [
       { color: "#268bd2", order: 15 },
       { color: "#2aa198", order: 16 },
       { color: "#859900", order: 17 }
+    ]
+  },
+  {
+    name: "Bad Wolf",
+    author: "Steve Losh",
+    colors: [
+      { color: "#f8f6f2", order: 1 },
+      { color: "#ffffff", order: 2 },
+      { color: "#000000", order: 3 },
+      { color: "#d9cec3", order: 4 },
+      { color: "#998f84", order: 5 },
+      { color: "#857f78", order: 6 },
+      { color: "#666462", order: 7 },
+      { color: "#45413b", order: 8 },
+      { color: "#35322d", order: 9 },
+      { color: "#242321", order: 10 },
+      { color: "#1c1b1a", order: 12 },
+      { color: "#141413", order: 13 },
+      { color: "#fade3e", order: 14 },
+      { color: "#f4cf86", order: 15 },
+      { color: "#ff2c4b", order: 16 },
+      { color: "#8cffba", order: 17 },
+      { color: "#0a9dff", order: 18 },
+      { color: "#ffa724", order: 19 },
+      { color: "#aeee00", order: 20 },
+      { color: "#ff9eb8", order: 21 },
+      { color: "#b88853", order: 21 },
+      { color: "#c7915b", order: 21 },
+      { color: "#88633f", order: 21 }
     ]
   }
 ];
