@@ -1,1 +1,1 @@
-web: node server.js --some-arg 1
+web: node server.js
