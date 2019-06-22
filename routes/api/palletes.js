@@ -18,6 +18,32 @@ router.get("/all", (req, res) => {
     .then(palletes => res.json(palletes));
 });
 
+// @route GET api/palletes/getById
+// @desc Get pallete by ID
+// @access Public
+router.get("/getById", (req, res) => {
+  const { query } = req;
+  const { id } = query;
+  const result = { success: false };
+
+  if (!id) {
+    return res.status(400).send(result);
+  }
+
+  Pallete.findById({ _id: id })
+    .then(pallete => {
+      result.pallete = pallete;
+      result.message = "Success";
+      result.success = true;
+      return res.status(200).send(result);
+    })
+    .catch(err => {
+      console.error(err);
+      result.message = "Server Error";
+      return res.status(500).send();
+    });
+});
+
 // @route POST api/palletes/new
 // @desc Create new pallete
 // @access protected
