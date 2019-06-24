@@ -9,15 +9,27 @@ export default class PalleteDetail extends Component {
 
     this.state = {
       id: this.props.match.params.id,
-      name: "Cool Theme Name",
+      name: "",
       author: "",
       colors: [],
-      loading: false,
+      loading: true,
       editing: false
     };
 
-    // fetch pallete from server
-    // update state.loading after
+    fetch(`/api/palletes/getById?id=${this.state.id}`, {
+      method: "GET"
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.success) {
+          this.setState({
+            name: res.pallete.name,
+            author: res.pallete.author,
+            colors: res.pallete.colors,
+            loading: false
+          });
+        }
+      });
   }
 
   render() {
