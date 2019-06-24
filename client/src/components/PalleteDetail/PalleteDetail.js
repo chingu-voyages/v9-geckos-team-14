@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import chroma from "chroma-js";
 import "./PalleteDetail.css";
 
 export default class PalleteDetail extends Component {
@@ -56,10 +57,22 @@ export default class PalleteDetail extends Component {
           )}
           <div className="pallete-detail__colors">
             {colors.map((color, index) => {
+              const luminance = chroma(color.hex).luminance();
+              let fontColor;
+
+              if (luminance > 0.18) {
+                fontColor = chroma(color.hex).darken(2.6);
+              } else {
+                fontColor = chroma(color.hex).brighten(2);
+              }
+
               return (
                 <div
                   className="color"
-                  style={{ backgroundColor: color.hex }}
+                  style={{
+                    backgroundColor: color.hex,
+                    color: fontColor
+                  }}
                   key={index}
                 >
                   <span className="hex">{`${color.hex}`}</span>
