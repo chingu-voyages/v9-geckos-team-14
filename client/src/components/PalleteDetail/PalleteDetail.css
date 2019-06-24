@@ -52,12 +52,12 @@
 
 .pallete-detail__colors .color .hex {
   font-size: 1.1rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .pallete-detail__colors .color .order {
   position: absolute;
   top: 2px;
   right: 4px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
