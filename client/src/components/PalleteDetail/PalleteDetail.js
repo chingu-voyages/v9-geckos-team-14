@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import chroma from "chroma-js";
 import "./PalleteDetail.css";
 
@@ -27,11 +28,19 @@ export default class PalleteDetail extends Component {
             name: res.pallete.name,
             author: res.pallete.author,
             colors: res.pallete.colors,
-            loading: false
+            loading: false,
+            copied: false
           });
         }
       });
   }
+
+  onCopyHandler = event => {
+    this.setState({ copied: true });
+    setTimeout(() => {
+      this.setState({ copied: false });
+    }, 600);
+  };
 
   render() {
     const { name, author, colors, loading, editing } = this.state;
@@ -67,20 +76,26 @@ export default class PalleteDetail extends Component {
               }
 
               return (
-                <div
-                  className="color"
-                  style={{
-                    backgroundColor: color.hex,
-                    color: fontColor
-                  }}
+                <CopyToClipboard
+                  text={color.hex}
+                  onCopy={this.onCopyHandler}
                   key={index}
                 >
-                  <span className="hex">{`${color.hex}`}</span>
-                  <div className="order">{`${color.order}`}</div>
-                </div>
+                  <div
+                    className="color"
+                    style={{
+                      backgroundColor: color.hex,
+                      color: fontColor
+                    }}
+                  >
+                    <span className="hex">{color.hex}</span>
+                    <div className="order">{color.order}</div>
+                  </div>
+                </CopyToClipboard>
               );
             })}
           </div>
+          {this.state.copied ? <span className="copied">Copied!</span> : false}
         </div>
       </Container>
     );
