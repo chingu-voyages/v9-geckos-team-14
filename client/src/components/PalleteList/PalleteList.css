@@ -16,6 +16,8 @@
   border-radius: 5px;
   transition: all 0.3s ease;
   opacity: 0.7;
+  width: 197px;
+  height: 147px;
 }
 
 .add-pallete:hover {
