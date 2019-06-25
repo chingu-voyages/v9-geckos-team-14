@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Pallete from "../Palette/Pallete";
 import AddCircleOutline from "@material-ui/icons/AddCircleOutline";
+import { isAuthorized } from "../../resources/Helper";
 import "./PalleteList.css";
 
 export default class PaletteList extends Component {
@@ -24,10 +25,14 @@ export default class PaletteList extends Component {
     const { palletes } = this.state;
     return (
       <div className="pallete-list">
-        <div className="pallete add-pallete">
-          <AddCircleOutline className="add-pallete__icon" />
-          <span className="add-pallete__text">Create new</span>
-        </div>
+        {isAuthorized() ? (
+          <div className="pallete add-pallete">
+            <AddCircleOutline className="add-pallete__icon" />
+            <span className="add-pallete__text">Create new</span>
+          </div>
+        ) : (
+          false
+        )}
         {palletes.map((pallete, index) => {
           return (
             <Pallete
