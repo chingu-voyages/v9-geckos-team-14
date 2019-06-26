@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Pallete from "../Palette/Pallete";
 import AddCircleOutline from "@material-ui/icons/AddCircleOutline";
 import { isAuthorized } from "../../resources/Helper";
@@ -26,10 +27,15 @@ export default class PaletteList extends Component {
     return (
       <div className="pallete-list">
         {isAuthorized() ? (
-          <div className="pallete add-pallete">
-            <AddCircleOutline className="add-pallete__icon" />
-            <span className="add-pallete__text">Create new</span>
-          </div>
+          <Link
+            to="/pallete/new"
+            style={{ textDecoration: "none", color: "#282828" }}
+          >
+            <div className="pallete add-pallete">
+              <AddCircleOutline className="add-pallete__icon" />
+              <span className="add-pallete__text">Create new</span>
+            </div>
+          </Link>
         ) : (
           false
         )}
