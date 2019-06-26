@@ -54,7 +54,7 @@ export default class Header extends Component {
     );
     const loginLink = (
       <Link className="login-link" to="/login">
-        Login
+        Sign In
       </Link>
     );
     return (
