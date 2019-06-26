@@ -291,12 +291,7 @@ class Login extends Component {
                 Sign In
               </Typography>
               {signedUp ? (
-                <Typography
-                  variant="subtitle2"
-                  color="primary"
-                  gutterTop
-                  gutterBottom
-                >
+                <Typography variant="subtitle2" color="primary" gutterBottom>
                   Congratulations! Now you can Sign In.
                 </Typography>
               ) : (
