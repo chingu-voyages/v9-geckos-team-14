@@ -28,7 +28,7 @@
 .pallete-detail__colors {
   display: flex;
   flex-flow: row wrap;
-  align-self: center;
+  align-self: start;
   justify-content: flex-start;
   margin-top: 2rem;
   transition: all 0.2s ease;
