@@ -1,5 +1,6 @@
 const Pallete = require("./models/Pallete");
 const mongoose = require("mongoose");
+const MONGO_URI = require("./config/keys").mongoURI;
 
 const THEMES = [
   {
@@ -130,7 +131,7 @@ const THEMES = [
 ];
 
 mongoose
-  .connect("mongodb://localhost/chingu-color-app", {
+  .connect(MONGO_URI, {
     useNewUrlParser: true,
     useFindAndModify: false
   })
