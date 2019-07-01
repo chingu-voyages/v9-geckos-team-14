@@ -52,6 +52,7 @@ class Login extends Component {
       signUpPasswordsMatch: true,
       signUpReady: false,
       signedUp: false,
+      signedIn: false,
       signInReady: false,
       swipeIndex: 0
     };
@@ -260,7 +261,8 @@ class Login extends Component {
             loading: false,
             success: json.success,
             token: json.token,
-            signInStatus: signInStatus
+            signInStatus: signInStatus,
+            signedIn: true
           });
         }, 1000);
       });
@@ -275,6 +277,7 @@ class Login extends Component {
       signInReady,
       signUpReady,
       signedUp,
+      signedIn,
       swipeIndex
     } = this.state;
 
@@ -306,7 +309,7 @@ class Login extends Component {
                     ? signInStatus.username.message
                     : "Username"
                 }
-                error={!signInStatus.username.ok}
+                error={!signInStatus.username.ok || signedIn}
                 value={signInStatus.username.value}
                 onChange={this.onChangeSignInUsername}
               />
