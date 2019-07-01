@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Pallete from "../Palette/Pallete";
 import AddCircleOutline from "@material-ui/icons/AddCircleOutline";
-import { isAuthorized } from "../../resources/Helper";
 import "./PalleteList.css";
 
 export default class PaletteList extends Component {
@@ -26,19 +25,15 @@ export default class PaletteList extends Component {
     const { palletes } = this.state;
     return (
       <div className="pallete-list">
-        {isAuthorized() ? (
-          <Link
-            to="/pallete/new"
-            style={{ textDecoration: "none", color: "#282828" }}
-          >
-            <div className="pallete add-pallete">
-              <AddCircleOutline className="add-pallete__icon" />
-              <span className="add-pallete__text">Create new</span>
-            </div>
-          </Link>
-        ) : (
-          false
-        )}
+        <Link
+          to="/pallete/new"
+          style={{ textDecoration: "none", color: "#282828" }}
+        >
+          <div className="pallete add-pallete">
+            <AddCircleOutline className="add-pallete__icon" />
+            <span className="add-pallete__text">Create new</span>
+          </div>
+        </Link>
         {palletes.map((pallete, index) => {
           return (
             <Pallete
