@@ -174,6 +174,7 @@ export default class PalleteNew extends Component {
           <Button
             className="submit-pallete"
             fullWidth
+            disabled={name && colors.length ? false : true}
             size="large"
             onClick={this.submit}
           >
