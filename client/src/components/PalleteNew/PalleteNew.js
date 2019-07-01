@@ -37,9 +37,20 @@ export default class PalleteNew extends Component {
   };
 
   handleHEX = event => {
+    const value = event.target.value;
+    const len = value.length;
+
+    if (len > 6) return;
+
+    if (!chroma.valid(value)) {
+      this.setState({
+        currentHEX: value
+      });
+      return;
+    }
     this.setState({
-      currentHEX: chroma(event.target.value).hex(),
-      currentRGB: chroma(event.target.value).rgb()
+      currentHEX: len === 3 ? value :chroma(value).hex(),
+      currentRGB: chroma(value).rgb()
     });
   };
 
@@ -115,7 +126,7 @@ export default class PalleteNew extends Component {
               })}
               <TextField
                 className="hex"
-                value={currentHEX.slice(1)}
+                value={currentHEX.replace("#", "")}
                 onChange={this.handleHEX}
                 InputProps={{
                   startAdornment: (
@@ -127,7 +138,7 @@ export default class PalleteNew extends Component {
             <div className="color">
               <div
                 className="display"
-                style={{ backgroundColor: currentHEX }}
+                style={{ backgroundColor: `rgb(${currentRGB})` }}
               />
               <Button
                 className="new-color-btn random"
