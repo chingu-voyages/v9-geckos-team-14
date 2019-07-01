@@ -57,6 +57,26 @@ export default class PalleteNew extends Component {
     });
   };
 
+  submit = event => {
+    const { name, author, colors } = this.state;
+    console.log("body: ", name, author, colors);
+    fetch("/api/palletes/new", {
+      method: "POST",
+      body: JSON.stringify({
+        name: name,
+        author: author,
+        colors: colors
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      });
+  };
+
   render() {
     const { name, colors, currentHEX, currentRGB } = this.state;
     const RGB = ["R", "G", "B"];
@@ -151,6 +171,14 @@ export default class PalleteNew extends Component {
               );
             })}
           </div>
+          <Button
+            className="submit-pallete"
+            fullWidth
+            size="large"
+            onClick={this.submit}
+          >
+            Submit
+          </Button>
         </div>
       </Container>
     );
