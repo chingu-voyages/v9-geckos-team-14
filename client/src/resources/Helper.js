@@ -84,4 +84,21 @@ function isAuthorized() {
   }
 }
 
-export { generatePalette, getFromStorage, setInStorage, isAuthorized };
+function getUsername() {
+  let username;
+  if (isAuthorized()) {
+    const obj = getFromStorage("main_app_token");
+    username = obj.username;
+  } else {
+    username = undefined;
+  }
+  return username;
+}
+
+export {
+  generatePalette,
+  getFromStorage,
+  setInStorage,
+  isAuthorized,
+  getUsername
+};
