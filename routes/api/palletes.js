@@ -63,7 +63,7 @@ router.post("/new", (req, res) => {
 
   const newPallete = new Pallete({
     name: name,
-    author: author ? author : "By anonymouse"
+    author: author
   });
 
   colors.map(color => {
