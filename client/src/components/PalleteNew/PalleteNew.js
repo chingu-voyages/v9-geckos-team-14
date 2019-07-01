@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Container from "@material-ui/core/Container";
-// import CircularProgress from "@material-ui/core/CircularProgress";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import chroma from "chroma-js";
+import { getUsername } from "../../resources/Helper";
 import "./PalleteNew.css";
 
 export default class PalleteNew extends Component {
@@ -15,6 +15,7 @@ export default class PalleteNew extends Component {
 
     this.state = {
       name: "",
+      author: getUsername(),
       colors: [],
       currentHEX: randomColor.hex(),
       currentRGB: randomColor.rgb()
