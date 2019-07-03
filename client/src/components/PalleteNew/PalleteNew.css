@@ -38,6 +38,8 @@
 .pallete-detail__colorpicker .color .display {
   width: 100%;
   flex-grow: 1;
+  border: none;
+  padding: 0;
 }
 
 .pallete-detail__colorpicker .color .new-color-btn {

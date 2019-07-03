@@ -84,6 +84,14 @@ export default class PalleteNew extends Component {
     return duplicate;
   };
 
+  selectColor = event => {
+    const color = event.target.value;
+    this.setState({
+      currentHEX: chroma(color).hex(),
+      currentRGB: chroma(color).rgb()
+    });
+  };
+
   submit = event => {
     this.setState({ loading: true });
     const { name, author, colors } = this.state;
@@ -129,7 +137,7 @@ export default class PalleteNew extends Component {
             <h2>Create new color pallete</h2>
             <TextField
               id="palleteName"
-              label="Name"
+              label="Name*"
               value={name}
               onChange={this.handleChange("name")}
               margin="normal"
@@ -166,8 +174,11 @@ export default class PalleteNew extends Component {
               />
             </div>
             <div className="color">
-              <div
+              <input
+                type="color"
                 className="display"
+                value={currentHEX}
+                onChange={this.selectColor}
                 style={{ backgroundColor: `rgb(${currentRGB})` }}
               />
               <Button
