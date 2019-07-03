@@ -85,8 +85,8 @@ export default class PalleteNew extends Component {
   };
 
   submit = event => {
+    this.setState({ loading: true });
     const { name, author, colors } = this.state;
-    console.log("body: ", name, author, colors);
     fetch("/api/palletes/new", {
       method: "POST",
       body: JSON.stringify({
@@ -100,7 +100,14 @@ export default class PalleteNew extends Component {
     })
       .then(res => res.json())
       .then(res => {
+        setTimeout(() => {
+          this.setState({ loading: false, submitted: true });
+        }, 1000);
         console.log(res);
+      })
+      .catch(err => {
+        this.setState({ loading: false });
+        console.error(err);
       });
   };
 
