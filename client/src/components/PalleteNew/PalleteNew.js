@@ -4,6 +4,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
+import AddCircleOutline from "@material-ui/icons/AddCircleOutline";
 import chroma from "chroma-js";
 import { getUsername } from "../../resources/Helper";
 import "./PalleteNew.css";
@@ -89,6 +90,14 @@ export default class PalleteNew extends Component {
     this.setState({
       currentHEX: chroma(color).hex(),
       currentRGB: chroma(color).rgb()
+    });
+  };
+
+  removeColor = index => event => {
+    const { colors } = this.state;
+    colors.splice(index, 1);
+    this.setState({
+      colors: colors
     });
   };
 
@@ -218,6 +227,10 @@ export default class PalleteNew extends Component {
                     color: fontColor
                   }}
                 >
+                  <AddCircleOutline
+                    className="delete-color-btn"
+                    onClick={this.removeColor(index)}
+                  />
                   <span className="hex">{color.hex}</span>
                   <div className="order">{color.order}</div>
                 </div>
