@@ -12,6 +12,8 @@
 .pallete__link {
   text-decoration: none;
   color: #282828;
+  display: block;
+  height: 100%;
 }
 
 .pallete .name {
