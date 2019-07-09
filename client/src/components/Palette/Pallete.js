@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-// import ThumbUp from "@material-ui/icons/ThumbUp";
-// import Favorite from "@material-ui/icons/Favorite";
-// import DeleteIcon from "@material-ui/icons/Delete";
 import "./Pallete.css";
 import { Link } from "react-router-dom";
 
@@ -48,11 +45,6 @@ export default class Palette extends Component {
             })}
           </div>
         </Link>
-        {/* <div className="controls">
-          <ThumbUp className="controls__btn thumbup" />
-          <Favorite className="controls__btn favorite" />
-          <DeleteIcon className="controls__btn delete" />
-        </div> */}
       </div>
     );
   }

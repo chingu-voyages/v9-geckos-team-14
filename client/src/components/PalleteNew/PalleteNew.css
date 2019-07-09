@@ -49,3 +49,25 @@
 .pallete-detail .submit-pallete {
   margin-top: 2rem;
 }
+
+.pallete-detail .delete-color-btn {
+  width: 20px;
+  position: absolute;
+  top: 0;
+  right: 2px;
+  transform: rotate(45deg);
+  transition: inherit;
+  opacity: 0;
+}
+
+.pallete-detail .delete-color-btn:hover {
+  transform: rotate(45deg) scale(1.1);
+}
+
+.pallete-detail .color:hover > .order {
+  display: none;
+}
+
+.pallete-detail .color:hover > .delete-color-btn {
+  opacity: 1;
+}
