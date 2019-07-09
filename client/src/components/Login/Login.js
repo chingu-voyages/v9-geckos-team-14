@@ -51,6 +51,8 @@ class Login extends Component {
       },
       signUpPasswordsMatch: true,
       signUpReady: false,
+      signedUp: false,
+      signedIn: false,
       signInReady: false,
       swipeIndex: 0
     };
@@ -188,7 +190,7 @@ class Login extends Component {
   }
 
   onSignUp(event) {
-    const { signUpStatus } = this.state;
+    const { signUpStatus, signInStatus } = this.state;
 
     this.setState({
       loading: true
@@ -215,9 +217,13 @@ class Login extends Component {
         signUpStatus.username.message = json.username.message;
         signUpStatus.password.ok = json.password.ok;
         signUpStatus.password.message = json.password.message;
+        signInStatus.username.value = signUpStatus.username.value;
         this.setState({
           loading: false,
-          signUpStatus: signUpStatus
+          signedUp: true,
+          signUpStatus: signUpStatus,
+          signInStatus: signInStatus,
+          swipeIndex: 0
         });
       });
   }
@@ -255,7 +261,8 @@ class Login extends Component {
             loading: false,
             success: json.success,
             token: json.token,
-            signInStatus: signInStatus
+            signInStatus: signInStatus,
+            signedIn: true
           });
         }, 1000);
       });
@@ -269,6 +276,8 @@ class Login extends Component {
       signUpStatus,
       signInReady,
       signUpReady,
+      signedUp,
+      signedIn,
       swipeIndex
     } = this.state;
 
@@ -284,6 +293,14 @@ class Login extends Component {
               <Typography variant="h6" gutterBottom>
                 Sign In
               </Typography>
+              {signedUp ? (
+                <Typography variant="subtitle2" color="primary" gutterBottom>
+                  Congratulations! Now you can Sign In.
+                </Typography>
+              ) : (
+                false
+              )}
+
               <TextField
                 id="username"
                 className="login__input"
@@ -292,7 +309,7 @@ class Login extends Component {
                     ? signInStatus.username.message
                     : "Username"
                 }
-                error={!signInStatus.username.ok}
+                error={!signInStatus.username.ok || signedIn}
                 value={signInStatus.username.value}
                 onChange={this.onChangeSignInUsername}
               />

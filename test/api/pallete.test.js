@@ -45,6 +45,74 @@ describe("API Palletes", function() {
     });
   });
 
+  describe("GET /api/palletes/getById", function() {
+    it("Should respond with status 400 if no ID", function() {
+      return request(app)
+        .get("/api/palletes/getById")
+        .expect(400);
+    });
+
+    it("Should respond with json", function() {
+      pallete = new Pallete();
+      pallete.name = "New theme";
+      pallete.author = "noname";
+      pallete.colors = [
+        { hex: "#ffffff", order: 1 },
+        { hex: "#000000", order: 2 }
+      ];
+      pallete.save();
+
+      return request(app)
+        .get(`/api/palletes/getById?id=${pallete._id}`)
+        .set({
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        })
+        .expect("Content-Type", /json/);
+    });
+
+    it("Should respond with status 200 if pallete found", function() {
+      pallete = new Pallete();
+      pallete.name = "New theme 2";
+      pallete.author = "non4me";
+      pallete.colors = [
+        { hex: "#ffffff", order: 1 },
+        { hex: "#000000", order: 2 }
+      ];
+      pallete.save();
+
+      return request(app)
+        .get(`/api/palletes/getById?id=${pallete._id}`)
+        .set({
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        })
+        .expect(200);
+    });
+
+    it("Should respond with pallete object if found", function() {
+      pallete = new Pallete();
+      pallete.name = "New theme 3";
+      pallete.author = "non4m3";
+      pallete.colors = [
+        { hex: "#ffffff", order: 1 },
+        { hex: "#000000", order: 2 }
+      ];
+      pallete.save();
+
+      return request(app)
+        .get(`/api/palletes/getById?id=${pallete._id}`)
+        .set({
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        })
+        .expect(200)
+        .then(res => {
+          assert.isObject(res.body.pallete);
+        });
+    });
+  });
+
   describe("POST /api/palletes/new", function() {
     it("Should accept application/json", function() {
       const payload = {

@@ -1,0 +1,73 @@
+.pallete-detail__description h2 {
+  color: #2e2e2e;
+}
+
+.pallete-detail__colorpicker {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.pallete-detail__colorpicker .controls {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1rem;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+}
+
+.pallete-detail__colorpicker .controls .rgb {
+  margin-bottom: 0;
+  width: 50px;
+  margin-bottom: 0.5rem;
+}
+
+.pallete-detail__colorpicker .controls .hex {
+  margin-bottom: 0;
+  width: 85px;
+}
+
+.pallete-detail__colorpicker .color {
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.pallete-detail__colorpicker .color .display {
+  width: 100%;
+  flex-grow: 1;
+  border: none;
+  padding: 0;
+}
+
+.pallete-detail__colorpicker .color .new-color-btn {
+  margin-top: 1rem;
+}
+
+.pallete-detail .submit-pallete {
+  margin-top: 2rem;
+}
+
+.pallete-detail .delete-color-btn {
+  width: 20px;
+  position: absolute;
+  top: 0;
+  right: 2px;
+  transform: rotate(45deg);
+  transition: inherit;
+  opacity: 0;
+}
+
+.pallete-detail .delete-color-btn:hover {
+  transform: rotate(45deg) scale(1.1);
+}
+
+.pallete-detail .color:hover > .order {
+  display: none;
+}
+
+.pallete-detail .color:hover > .delete-color-btn {
+  opacity: 1;
+}

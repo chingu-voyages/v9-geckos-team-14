@@ -1,0 +1,73 @@
+.pallete {
+  background-color: #fff;
+  width: 200px;
+  height: 150px;
+  position: relative;
+  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 0.8rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.pallete__link {
+  text-decoration: none;
+  color: #282828;
+  display: block;
+  height: 100%;
+}
+
+.pallete .name {
+  font-size: 0.9rem;
+  display: block;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  font-weight: 500;
+}
+
+.pallete .color-list {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.pallete .color-list .color {
+  width: 40px;
+  height: 30px;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.pallete .controls {
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+  color: #fff;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: -30px;
+  height: 30px;
+  transition: all 0.3s ease;
+}
+
+.pallete .controls__btn {
+  font-size: 1.3rem;
+  transition: inherit;
+}
+
+.pallete .controls__btn:hover,
+.pallete .controls__btn:focus {
+  color: #fb4934;
+}
+
+.pallete:hover {
+  cursor: pointer;
+  box-shadow: 0px 1px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pallete:hover > .controls {
+  bottom: 0;
+}
